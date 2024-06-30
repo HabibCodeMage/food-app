@@ -5,7 +5,6 @@ import RestaurantList from "@/modules/resturants/components/RestaurantList";
 export default function Home() {
   return (
     <main className={styles.main}>
-      <h1>Home</h1>
       <CategoriesList />
       <RestaurantList />
     </main>
