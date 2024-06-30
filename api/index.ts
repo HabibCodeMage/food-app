@@ -1,9 +1,8 @@
-import axios, { AxiosInstance } from 'axios';
-import Categories from './services/categories';
-import Restaurants from './services/Restaurants';
+import axios, { AxiosInstance } from "axios";
+import Categories from "./services/Categories";
+import Restaurants from "./services/Restaurants";
 
-
-const BACKEND_BASE_URL = 'https://gist.githubusercontent.com/wilson-wego';
+const BACKEND_BASE_URL = "https://gist.githubusercontent.com/wilson-wego";
 
 class Api {
   axios: AxiosInstance;
@@ -13,9 +12,9 @@ class Api {
 
   constructor() {
     this.axios = axios.create({
-      baseURL: `${BACKEND_BASE_URL}`, // internal api
+      baseURL: `${BACKEND_BASE_URL}`,
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
     this.categories = new Categories(this.axios);

@@ -1,14 +1,9 @@
-import ApiBase from '../common/ApiBase';
+import ApiBase from "../common/ApiBase";
 
-export default class Auth extends ApiBase {
-  async login(userName: string, password: string) {
-    return this.axios.post('/auth/login', { userName, password });
-  }
-  async signUp(userName: string, password: string) {
-    return this.axios.post('/auth/signUp', { userName, password });
-  }
-
-  async getUser() {
-    return this.axios.get('/auth');
+export default class Restaurants extends ApiBase {
+  async get() {
+    return this.axios.get(
+      "/8311b463cd331099e34a1f251dad4cbf/raw/ef4e1b48002e5017dd78bbb48a2adf8a97419529/food.json"
+    );
   }
 }
