@@ -1,3 +1,7 @@
 .main {
-    padding: 26px 24px 24px 24px;
+  padding: 26px 24px 24px 24px;
+}
+
+.categoriesBox {
+  margin-bottom: 42px;
 }
