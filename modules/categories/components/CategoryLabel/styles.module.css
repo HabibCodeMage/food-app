@@ -1,0 +1,39 @@
+.root {
+  min-width: 52px;
+  height: 100%;
+  border: 1px solid var(--secondary-yellow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 14px;
+  cursor: pointer;
+  color: var(--gray);
+}
+
+.labelHover {
+}
+
+.labelHover:hover {
+  background-color: var(--secondary-yellow);
+}
+
+.leftBorder {
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+}
+
+.root > p {
+  text-align: center;
+}
+
+.rightBorder {
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+}
+
+.bgYellow {
+  background-color: var(--primary-yellow);
+  border: 1px solid var(--primary-yellow);
+  color: var(--black);
+}

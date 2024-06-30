@@ -3,17 +3,28 @@ import { getCategories } from "@/modules/categories/state/categories-actions";
 import { AppDispatch, RootState } from "@/modules/common/store";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { setSelectedCategoryId } from "../state/categories-slice";
 
 const useCategories = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { categories, status, error } = useSelector(
+  const { categories, status, error, selectedCategoryId } = useSelector(
     (state: RootState) => state.categories
   );
+
+  const handleCategoryChange = (categoryId: string) => {
+    dispatch(setSelectedCategoryId(categoryId));
+  };
 
   useEffect(() => {
     if (status === "idle" || status === "failed") dispatch(getCategories());
   }, []);
 
-  return { categories, status, error };
+  return {
+    categories,
+    status,
+    error,
+    selectedCategoryId,
+    handleCategoryChange,
+  };
 };
 export default useCategories;

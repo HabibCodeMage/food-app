@@ -1,5 +1,11 @@
+:root {
+  --primary-yellow: #ffc700;
+  --secondary-yellow: #fce595;
+  --gray: #0000007c;
+  --black: #000;
+}
+
 * {
-  box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
