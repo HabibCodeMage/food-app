@@ -1,0 +1,5 @@
+.root {
+  border-radius: 6px;
+  background-color: var(--light-gray);
+  padding: 0 18px;
+}

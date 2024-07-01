@@ -1,0 +1,11 @@
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  height: 30px;
+}
+
+.text {
+  color: var(--green);
+  font-weight: 400;
+}
