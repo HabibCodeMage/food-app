@@ -1,5 +1,5 @@
 .root {
-  height: 270px;
+  height: 300px;
   border-radius: 14px;
   display: grid;
   grid-template-rows: 178px 92px;
@@ -25,4 +25,10 @@
   font-size: 16px;
   margin-bottom: 20px;
   text-transform: capitalize;
+}
+
+.tagsBox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }

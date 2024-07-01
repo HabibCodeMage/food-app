@@ -2,6 +2,9 @@ import Card from "@/modules/common/components/Card";
 import Restaurant from "@/modules/common/interfaces/restaurants.interface";
 import React, { FC } from "react";
 import styles from "./styles.module.css";
+import StartTag from "../StarTag";
+import TimeTag from "../TimeTag";
+import NewTag from "../NewTag";
 
 const randomImgUrl = "https://picsum.photos/500";
 
@@ -18,7 +21,14 @@ const RestaurantCard: FC<{ restaurant: Restaurant }> = ({ restaurant }) => {
       </div>
       <div className={styles.contentBox}>
         <h3 className={styles.className}>{restaurant.name}</h3>
-        <div></div>
+        <div className={styles.tagsBox}>
+          <StartTag count={restaurant.rating} />
+          <TimeTag
+            minCookTime={restaurant.minCookTime}
+            maxCookTime={restaurant.maxCookTime}
+          />
+          {restaurant.isNew && <NewTag />}
+        </div>
       </div>
     </Card>
   );
