@@ -4,6 +4,7 @@
   display: grid;
   grid-template-rows: 178px 92px;
   overflow: hidden;
+  position: relative;
 }
 
 .imgBox {
