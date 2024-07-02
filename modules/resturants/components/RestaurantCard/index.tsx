@@ -5,6 +5,7 @@ import styles from "./styles.module.css";
 import StartTag from "../StarTag";
 import TimeTag from "../TimeTag";
 import NewTag from "../NewTag";
+import PromotionTag from "../PromotionTag";
 
 const randomImgUrl = "https://picsum.photos/500";
 
@@ -19,6 +20,7 @@ const RestaurantCard: FC<{ restaurant: Restaurant }> = ({ restaurant }) => {
           className={styles.imgContainer}
         />
       </div>
+      <PromotionTag promotion={restaurant.promotion} />
       <div className={styles.contentBox}>
         <h3 className={styles.className}>{restaurant.name}</h3>
         <div className={styles.tagsBox}>

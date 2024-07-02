@@ -2,7 +2,7 @@ interface Restaurant {
   id: string;
   index: number;
   rating: number;
-  promotion: string;
+  promotion: "gift" | "1+1" | "discount" | null;
   isNew: boolean;
   categoryId: string;
   minCookTime: number;
