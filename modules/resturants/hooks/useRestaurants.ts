@@ -6,7 +6,7 @@ import { getRestaurants } from "../state/restaurants-actions";
 
 const useRestaurants = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const { restaurants, status, error } = useSelector(
+  const { restaurants, status, error, hasMore } = useSelector(
     (state: RootState) => state.restaurants
   );
 
@@ -14,6 +14,6 @@ const useRestaurants = () => {
     if (status === "idle" || status === "failed") dispatch(getRestaurants());
   }, []);
 
-  return { restaurants, status, error };
+  return { restaurants, status, error, hasMore };
 };
 export default useRestaurants;
