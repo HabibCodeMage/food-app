@@ -4,6 +4,7 @@ import { AppDispatch, RootState } from "@/modules/common/store";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setSelectedCategoryId } from "../state/categories-slice";
+import { filterByLabelWithDelay } from "@/modules/resturants/state/restaurants-actions";
 
 const useCategories = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -13,6 +14,7 @@ const useCategories = () => {
 
   const handleCategoryChange = (categoryId: string) => {
     dispatch(setSelectedCategoryId(categoryId));
+    dispatch(filterByLabelWithDelay({ id: categoryId, delayMs: 100 }));
   };
 
   useEffect(() => {

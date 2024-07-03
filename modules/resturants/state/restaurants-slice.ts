@@ -1,5 +1,6 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import {
+  filterByLabelWithDelay,
   getRestaurants,
   nextPageWithDelay,
   searchWithDelay,
@@ -80,6 +81,21 @@ const restaurantsSlice = createSlice({
         state.hasMore = action.payload.length >= state.pageSize;
       })
       .addCase(searchWithDelay.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Error occurred";
+      })
+      .addCase(filterByLabelWithDelay.pending, (state) => {
+        state.status = "loading";
+        state.error = undefined;
+        state.page = 1;
+      })
+      .addCase(filterByLabelWithDelay.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.restaurants = action.payload;
+        state.page += 1;
+        state.hasMore = action.payload.length >= state.pageSize;
+      })
+      .addCase(filterByLabelWithDelay.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message ?? "Error occurred";
       });
