@@ -19,3 +19,20 @@
   border-top-left-radius: 14px;
   border-bottom-left-radius: 14px;
 }
+
+@media screen and (max-width: 600px) {
+  .root {
+    overflow-x: scroll;
+    height: 52px;
+    display: flex;
+    padding: 10px 5px;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    scrollbar-width: none; /* Hide scrollbar for Firefox */
+    -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+  }
+
+  .root::-webkit-scrollbar {
+    display: none; /* Hide scrollbar for WebKit browsers (Chrome, Safari) */
+  }
+}

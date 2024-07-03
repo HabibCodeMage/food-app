@@ -20,7 +20,7 @@ const RestaurantList: FC = () => {
 
   return (
     <div>
-      <div className={styles.root}>
+      <div className={`${styles.root} col-sm-1 col-md-2 col-lg-3 col-xl-4`}>
         {status === "idle" || status == "loading" ? (
           <>
             <RestaurantCardSkelton promotion={"gift"} isNew={true} />
@@ -37,6 +37,11 @@ const RestaurantList: FC = () => {
             <RestaurantCard key={restaurant.id} restaurant={restaurant} />
           ))
         )}
+        {status !== "idle" &&
+          status !== "loading" &&
+          restaurants.length === 0 && (
+            <p className={styles.textCenter}>No results found 🕵</p>
+          )}
       </div>
       <button onClick={(e) => {}}></button>
       <div className={styles.showMoreBtnBox}>

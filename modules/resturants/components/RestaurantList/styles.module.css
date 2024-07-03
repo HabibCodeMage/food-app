@@ -14,3 +14,32 @@
   display: flex;
   align-items: center;
 }
+
+.textCenter {
+  text-align: center;
+  font-size: 32px;
+}
+
+@media screen and (min-width: 360px) {
+  .root {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .root {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (min-width: 992px) {
+  .root {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .root {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

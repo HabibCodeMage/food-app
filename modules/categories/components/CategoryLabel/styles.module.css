@@ -9,6 +9,7 @@
   padding: 0px 14px;
   cursor: pointer;
   color: var(--gray);
+  text-wrap: nowrap;
 }
 
 .labelHover {
@@ -36,4 +37,10 @@
   background-color: var(--primary-yellow);
   border: 1px solid var(--primary-yellow);
   color: var(--black);
+}
+
+@media screen and (max-width: 600px) {
+  .root {
+    padding: 0px 24px;
+  }
 }
