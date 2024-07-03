@@ -1,5 +1,9 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { getRestaurants, nextPageWithDelay } from "./restaurants-actions";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
+import {
+  getRestaurants,
+  nextPageWithDelay,
+  searchWithDelay,
+} from "./restaurants-actions";
 import Restaurant from "@/modules/common/interfaces/restaurants.interface";
 
 interface RestaurantsState {
@@ -10,6 +14,7 @@ interface RestaurantsState {
   pageSize: number;
   hasMore: boolean;
   _restaurants: Restaurant[];
+  searchValue: string;
 }
 
 const initialState: RestaurantsState = {
@@ -20,16 +25,23 @@ const initialState: RestaurantsState = {
   pageSize: 8,
   hasMore: true,
   page: 1,
+  searchValue: "",
 };
 
 const restaurantsSlice = createSlice({
   name: "restaurants",
   initialState,
-  reducers: {},
+  reducers: {
+    setSearchTerm(state, action: PayloadAction<string>) {
+      state.page = 1;
+      state.searchValue = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getRestaurants.pending, (state) => {
         state.status = "loading";
+        state.error = undefined;
       })
       .addCase(getRestaurants.fulfilled, (state, action) => {
         state._restaurants = action.payload;
@@ -44,6 +56,7 @@ const restaurantsSlice = createSlice({
       })
       .addCase(nextPageWithDelay.pending, (state) => {
         state.status = "loading";
+        state.error = undefined;
       })
       .addCase(nextPageWithDelay.fulfilled, (state, action) => {
         const nextPageRestaurants = action.payload;
@@ -55,11 +68,25 @@ const restaurantsSlice = createSlice({
       .addCase(nextPageWithDelay.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message || "Failed to load next page";
+      })
+      .addCase(searchWithDelay.pending, (state) => {
+        state.status = "loading";
+        state.error = undefined;
+      })
+      .addCase(searchWithDelay.fulfilled, (state, action) => {
+        state.status = "succeeded";
+        state.restaurants = action.payload;
+        state.page += 1;
+        state.hasMore = action.payload.length >= state.pageSize;
+      })
+      .addCase(searchWithDelay.rejected, (state, action) => {
+        state.status = "failed";
+        state.error = action.error.message ?? "Error occurred";
       });
   },
 });
 
 // Export actions
-export const {} = restaurantsSlice.actions;
+export const { setSearchTerm } = restaurantsSlice.actions;
 
 export default restaurantsSlice.reducer;
