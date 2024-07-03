@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { nextPageWithDelay } from "../../state/restaurants-actions";
 import { AppDispatch } from "@/modules/common/store";
 import { ClipLoader } from "react-spinners";
+import RestaurantCardSkelton from "../RestaurantCardSkelton";
 
 const RestaurantList: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -20,9 +21,22 @@ const RestaurantList: FC = () => {
   return (
     <div>
       <div className={styles.root}>
-        {restaurants.map((restaurant) => (
-          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-        ))}
+        {status === "idle" || status == "loading" ? (
+          <>
+            <RestaurantCardSkelton promotion={"gift"} isNew={true} />
+            <RestaurantCardSkelton promotion={null} isNew={false} />
+            <RestaurantCardSkelton promotion={"discount"} isNew={true} />
+            <RestaurantCardSkelton promotion={null} isNew={false} />
+            <RestaurantCardSkelton promotion={"gift"} isNew={false} />
+            <RestaurantCardSkelton promotion={"discount"} isNew={true} />
+            <RestaurantCardSkelton promotion={"1+1"} isNew={false} />
+            <RestaurantCardSkelton promotion={null} isNew={true} />
+          </>
+        ) : (
+          restaurants.map((restaurant) => (
+            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+          ))
+        )}
       </div>
       <button onClick={(e) => {}}></button>
       <div className={styles.showMoreBtnBox}>

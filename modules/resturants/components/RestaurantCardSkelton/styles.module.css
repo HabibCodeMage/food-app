@@ -1,0 +1,35 @@
+.root {
+  height: 300px;
+  border-radius: 14px;
+  display: grid;
+  grid-template-rows: 178px 92px;
+  overflow: hidden;
+  position: relative;
+}
+
+.imgBox {
+  grid-row: 1 / -2;
+}
+
+.imgContainer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+.contentBox {
+  padding: 24px 20px 20px 20px;
+}
+
+.className {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-transform: capitalize;
+}
+
+.tagsBox {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}

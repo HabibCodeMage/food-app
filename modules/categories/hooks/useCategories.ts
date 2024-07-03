@@ -14,7 +14,7 @@ const useCategories = () => {
 
   const handleCategoryChange = (categoryId: string) => {
     dispatch(setSelectedCategoryId(categoryId));
-    dispatch(filterByLabelWithDelay({ id: categoryId, delayMs: 100 }));
+    dispatch(filterByLabelWithDelay({ id: categoryId, delayMs: 1000 }));
   };
 
   useEffect(() => {
