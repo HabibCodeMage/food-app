@@ -5,6 +5,7 @@
   grid-template-rows: 178px 92px;
   overflow: hidden;
   position: relative;
+  width: 100%;
 }
 
 .imgBox {
