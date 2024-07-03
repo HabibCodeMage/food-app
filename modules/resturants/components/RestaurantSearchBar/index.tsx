@@ -1,8 +1,8 @@
 "use client";
 import SearchBar from "@/modules/common/components/SearchBar";
-import { AppDispatch, RootState } from "@/modules/common/store";
+import { AppDispatch } from "@/modules/common/store";
 import { debounce } from "@/modules/common/utils";
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSearchTerm } from "../../state/restaurants-slice";
 import { searchWithDelay } from "../../state/restaurants-actions";

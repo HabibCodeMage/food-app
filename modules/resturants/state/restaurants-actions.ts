@@ -13,6 +13,50 @@ interface SearchThunkArgs {
   delayMs: number;
 }
 
+interface LabelThunkArgs {
+  id: string;
+  delayMs: number;
+}
+
+interface FilterOptions {
+  id: string;
+  searchValue: string;
+  existingRestaurantIds: string[];
+}
+
+// Helper function to filter restaurants
+const filterRestaurants = (
+  restaurants: Restaurant[],
+  options: FilterOptions
+): Restaurant[] => {
+  const { id, searchValue, existingRestaurantIds } = options;
+  const searchTerm = searchValue.toLowerCase();
+  let filteredRestaurants = restaurants;
+
+  if (id !== "all" && searchValue) {
+    filteredRestaurants = filteredRestaurants.filter(
+      (restaurant) =>
+        !existingRestaurantIds.includes(restaurant.id) &&
+        restaurant.name.toLowerCase().includes(searchTerm) &&
+        restaurant.categoryId === id
+    );
+  } else if (id !== "all") {
+    filteredRestaurants = filteredRestaurants.filter(
+      (restaurant) =>
+        !existingRestaurantIds.includes(restaurant.id) &&
+        restaurant.categoryId === id
+    );
+  } else if (searchValue) {
+    filteredRestaurants = filteredRestaurants.filter(
+      (restaurant) =>
+        !existingRestaurantIds.includes(restaurant.id) &&
+        restaurant.name.toLowerCase().includes(searchTerm)
+    );
+  }
+
+  return filteredRestaurants;
+};
+
 export const getRestaurants = createAsyncThunk("restaurants/get", async () => {
   try {
     const restaurants = await api.restaurants.get();
@@ -29,22 +73,22 @@ export const nextPageWithDelay = createAsyncThunk<
   { state: RootState }
 >("restaurants/nextPageWithDelay", async ({ delayMs }, { getState }) => {
   const state = getState().restaurants;
+  const categoryId = getState().categories.selectedCategoryId;
+
   const searchTerm = state.searchValue;
   let restaurantsToFetch: Restaurant[] = [];
 
   await new Promise((resolve) => setTimeout(resolve, delayMs));
-  if (searchTerm) {
+  if (searchTerm || categoryId) {
     const existingRestaurantIds = state.restaurants.map(
       (restaurant) => restaurant.id
     );
-    // Logic when a search term exists
-    const filteredRestaurants = state._restaurants.filter(
-      (restaurant) =>
-        !existingRestaurantIds.includes(restaurant.id) &&
-        restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    const filteredRestaurants = filterRestaurants(state._restaurants, {
+      id: categoryId,
+      searchValue: searchTerm,
+      existingRestaurantIds,
+    });
     restaurantsToFetch = filteredRestaurants.slice(0, state.pageSize); // Limit to page size
-    // Remove already fetched restaurants from restaurantsToFetch
   } else {
     // Default logic when no search term
     const totalPages = Math.ceil(state._restaurants.length / state.pageSize);
@@ -67,12 +111,40 @@ export const searchWithDelay = createAsyncThunk<
   "restaurants/searchWithDelay",
   async ({ searchTerm, delayMs }, { getState }) => {
     const state = getState().restaurants;
+    const categoryId = getState().categories.selectedCategoryId;
+
     await new Promise((resolve) => setTimeout(resolve, delayMs));
 
     // Example logic to filter data based on search term
-    const filteredRestaurants = state._restaurants.filter((restaurant) =>
-      restaurant.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+
+    const filteredRestaurants = filterRestaurants(state._restaurants, {
+      id: categoryId,
+      searchValue: searchTerm,
+      existingRestaurantIds: [],
+    });
+
+    return filteredRestaurants.slice(0, state.pageSize);
+  }
+);
+
+export const filterByLabelWithDelay = createAsyncThunk<
+  Restaurant[],
+  LabelThunkArgs,
+  { state: RootState }
+>(
+  "restaurants/filterByLabelWithDelay",
+  async ({ id, delayMs }, { getState }) => {
+    const state = getState().restaurants;
+    const searchValue = state.searchValue;
+
+    await new Promise((resolve) => setTimeout(resolve, delayMs));
+
+    const filteredRestaurants = filterRestaurants(state._restaurants, {
+      id,
+      searchValue,
+      existingRestaurantIds: [],
+    });
 
     return filteredRestaurants.slice(0, state.pageSize);
   }
