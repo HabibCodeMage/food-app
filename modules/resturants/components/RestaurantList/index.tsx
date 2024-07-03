@@ -21,7 +21,10 @@ const RestaurantList: FC = () => {
   return (
     <div>
       <div className={`${styles.root} col-sm-1 col-md-2 col-lg-3 col-xl-4`}>
-        {status === "idle" || status == "loading" ? (
+        {restaurants.map((restaurant) => (
+          <RestaurantCard key={restaurant.id} restaurant={restaurant} />
+        ))}
+        {(status === "idle" || status == "loading") && (
           <>
             <RestaurantCardSkelton promotion={"gift"} isNew={true} />
             <RestaurantCardSkelton promotion={null} isNew={false} />
@@ -32,10 +35,6 @@ const RestaurantList: FC = () => {
             <RestaurantCardSkelton promotion={"1+1"} isNew={false} />
             <RestaurantCardSkelton promotion={null} isNew={true} />
           </>
-        ) : (
-          restaurants.map((restaurant) => (
-            <RestaurantCard key={restaurant.id} restaurant={restaurant} />
-          ))
         )}
         {status !== "idle" &&
           status !== "loading" &&

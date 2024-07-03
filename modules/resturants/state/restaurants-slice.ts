@@ -73,6 +73,7 @@ const restaurantsSlice = createSlice({
       .addCase(searchWithDelay.pending, (state) => {
         state.status = "loading";
         state.error = undefined;
+        state.restaurants = [];
       })
       .addCase(searchWithDelay.fulfilled, (state, action) => {
         state.status = "succeeded";
@@ -88,6 +89,7 @@ const restaurantsSlice = createSlice({
         state.status = "loading";
         state.error = undefined;
         state.page = 1;
+        state.restaurants = [];
       })
       .addCase(filterByLabelWithDelay.fulfilled, (state, action) => {
         state.status = "succeeded";
