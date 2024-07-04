@@ -1,36 +1,76 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+This guide will help you set up and run the project locally. Follow the steps below to get started.
+
+### Prerequisites
+
+1. Node (22.1.0)
+1. Yarn (1.22.19)
+1. NVM
+
+### Step-by-Step Instructions
+
+#### Use node 22.1.0
 
 ```bash
-npm run dev
-# or
+nvm use 22.1.0
+```
+
+#### Use yarn 1.22.19
+
+```bash
+yarn set version 1.22.19
+```
+
+#### Install node modules
+
+```bash
+yarn
+```
+
+#### Run Local server
+
+```bash
 yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Run Story Book
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```bash
+yarn run storybook
+```
 
-## Learn More
+### Run Test Cases
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+yarn run test
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Folder structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `app` - next router and screens
+- `public` - images, fonts, etc
+- `modules` - business logic
+  - `[module]` - a module should be a self-contained feature
+    - `components` - module components
+    - `hooks` - hooks used by this module
+    - `utils` - utils used by this module
 
-## Deploy on Vercel
+## Development Rules
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- Use classic functional components instead of inline functions
+- Stick to the folder structure above
+- Use `camelCase` for variables and functions, exceptions: `snake_case` for backend data
+- Use **common** components from `modules/common/components` instead of creating new ones
+- If no common component fits your needs, create a new one in the `modules/common/components` folder
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Adding a new assets
+
+The assets are stored in the `public` folder.
+
+### Icons
+
+- Add the icon to the `modules/common/icons` folder
+- Import and export the icon in the `modules/common/components/index.tsx` file, there are existing examples that you can follow
