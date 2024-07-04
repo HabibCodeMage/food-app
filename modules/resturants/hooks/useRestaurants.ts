@@ -1,11 +1,11 @@
 "use client";
-import { AppDispatch, RootState } from "@/modules/common/store";
+import { AppThunkDispatch, RootState } from "@/modules/common/store";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { getRestaurants } from "../state/restaurants-actions";
 
 const useRestaurants = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppThunkDispatch>();
   const { restaurants, status, error, hasMore } = useSelector(
     (state: RootState) => state.restaurants
   );
