@@ -6,12 +6,12 @@ import styles from "./styles.module.css";
 import OutlineButton from "@/modules/common/components/OutlineButton";
 import { useDispatch } from "react-redux";
 import { nextPageWithDelay } from "../../state/restaurants-actions";
-import { AppDispatch } from "@/modules/common/store";
+import { AppThunkDispatch } from "@/modules/common/store";
 import { ClipLoader } from "react-spinners";
 import RestaurantCardSkelton from "../RestaurantCardSkelton";
 
 const RestaurantList: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppThunkDispatch>();
   const { restaurants, status, hasMore } = useRestaurants();
 
   const onShowMoreClick = () => {

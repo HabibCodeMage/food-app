@@ -4,16 +4,16 @@ This guide will help you set up and run the project locally. Follow the steps be
 
 ### Prerequisites
 
-1. Node (22.1.0)
+1. Node (20)
 1. Yarn (1.22.19)
 1. NVM
 
 ### Step-by-Step Instructions
 
-#### Use node 22.1.0
+#### Use node 20
 
 ```bash
-nvm use 22.1.0
+nvm use 20
 ```
 
 #### Use yarn 1.22.19
