@@ -2,14 +2,14 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { getCategories } from "./categories-actions";
 import Category from "@/modules/common/interfaces/category.interface";
 
-interface CartState {
+export interface CategoriesState {
   categories: Category[]; // Adjust the type according to your actual data structure
   status: "idle" | "loading" | "succeeded" | "failed";
   error?: string;
   selectedCategoryId: string;
 }
 
-const initialState: CartState = {
+const initialState: CategoriesState = {
   categories: [],
   status: "idle",
   error: undefined,

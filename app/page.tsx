@@ -1,7 +1,6 @@
 import CategoriesList from "@/modules/categories/components/CategoriesList";
 import styles from "./page.module.css";
 import RestaurantList from "@/modules/resturants/components/RestaurantList";
-import SearchBar from "@/modules/common/components/SearchBar";
 import RestaurantSearchBar from "@/modules/resturants/components/RestaurantSearchBar";
 
 export default function Home() {
