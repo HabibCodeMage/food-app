@@ -1,0 +1,10 @@
+# Validate branch name
+branch_name=$(git rev-parse --abbrev-ref HEAD)
+if ! [[ "$branch_name" =~ ^[0-9].*$ ]]; then
+  echo "Error: Branch name '$branch_name' is invalid. It should start with a digit."
+  exit 1
+fi
+
+# Run test cases
+echo "Running test cases..."
+yarn run test:unit
