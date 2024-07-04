@@ -7,7 +7,7 @@ import {
 } from "./restaurants-actions";
 import Restaurant from "@/modules/common/interfaces/restaurants.interface";
 
-interface RestaurantsState {
+export interface RestaurantsState {
   restaurants: Restaurant[];
   status: "idle" | "loading" | "succeeded" | "failed";
   error?: string;
