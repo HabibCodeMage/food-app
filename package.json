@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "test": "jest --watch",
-    "test:ci": "jest --ci"
+    "test:ci": "jest --ci",
+    "prepare": "husky",
+    "test:unit": "jest"
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.6",
@@ -34,6 +36,7 @@
     "@types/redux-mock-store": "^1.0.6",
     "eslint": "^8",
     "eslint-config-next": "14.2.4",
+    "husky": "^9.0.11",
     "redux-mock-store": "^1.5.3",
     "typescript": "^5"
   },
