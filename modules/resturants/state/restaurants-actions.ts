@@ -54,7 +54,9 @@ const filterRestaurants = (
     );
   }
 
-  return filteredRestaurants;
+  return filteredRestaurants.filter(
+    (restaurant) =>
+      !existingRestaurantIds.includes(restaurant.id) );;
 };
 
 export const getRestaurants = createAsyncThunk("restaurants/get", async () => {
