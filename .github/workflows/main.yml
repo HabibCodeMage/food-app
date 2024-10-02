@@ -1,0 +1,24 @@
+name: Deploy Branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      branch:
+        description: 'Enter the branch name to deploy'
+        required: true
+        type: string
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.event.inputs.branch }}  # Use the branch passed from the input
+
+      - name: Deploy branch
+        run: |
+          echo "Deploying branch ${{ github.event.inputs.branch }}"
+          # Add your deployment commands here, like deployment to production or another environment
