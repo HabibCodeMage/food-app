@@ -1,10 +1,24 @@
-name: Deploy Branch
+name: Deploy to Production
 
 on:
   workflow_dispatch:
     inputs:
+      environment:
+        description: 'Environment to deploy'
+        required: true
+        default: 'prod'
+        type: choice
+        options:
+          - dev
+          - stage
+          - prod
       branch:
-        description: 'Enter the branch name to deploy'
+        description: 'Branch to deploy'
+        required: true
+        default: 'release'
+        type: string
+      release_notes:
+        description: 'Release notes'
         required: true
         type: string
 
@@ -18,7 +32,13 @@ jobs:
         with:
           ref: ${{ github.event.inputs.branch }}  # Use the branch passed from the input
 
-      - name: Deploy branch
+      - name: Deploy to ${{ github.event.inputs.environment }}
         run: |
-          echo "Deploying branch ${{ github.event.inputs.branch }}"
-          # Add your deployment commands here, like deployment to production or another environment
+          echo "Deploying branch ${{ github.event.inputs.branch }} to ${{ github.event.inputs.environment }}"
+          echo "Release notes: ${{ github.event.inputs.release_notes }}"
+          # Add your deployment commands here (e.g., kubectl, terraform, etc.)
+
+      - name: Store Release Notes
+        run: |
+          echo "${{ github.event.inputs.release_notes }}" > release-notes.txt
+          # Optionally store or process the release notes
